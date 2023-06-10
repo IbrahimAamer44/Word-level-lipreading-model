@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lipsol</title>
+  <link rel="icon" type="image/x-icon" href="/static/tab-logo.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    body {
+      background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(120, 18, 115));
+      background-color: #21011f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+    button {
+      background-image: linear-gradient(to bottom right, rgb(93, 2, 88), rgb(50, 3, 57));
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    img#video_feed {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+      border: 1px solid #fff;
+    }
+
+    .button {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            padding: 0;
+            border: none;
+            background-color: #4f194b;
+            color: #fff;
+            font-size: 16px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background-image: linear-gradient(to bottom right, rgb(93, 2, 88), rgb(147, 62, 160));
+            background-color: #424242;
+            transition: width 4s linear;
+        }
+
+        .button.animate::before {
+            width: 100%;
+        }
+
+        .message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .shadowbox {
+
+          border: 1px solid #7a7a7a;
+          box-shadow: 8px 8px 8px #7c7b7b;
+         
+          background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+        }
+
+        .input-container {
+    position: relative;
+  }
+
+  .flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+
+}  
+
+.flex-child:first-child {
+    margin-right: 5px;
+
+} 
+.flex-child2 {
+    flex: 1;
+    flex-flow: row;
+
+    margin-top: 18px;
+    margin-right: 80;
+    border: 1px solid rgb(63, 14, 82);
+    width: 680px;
+    height: 480px;
+    background-image: linear-gradient(to bottom right, rgb(27, 26, 27), rgb(53, 9, 50));
+
+}  
+.center {
+  margin: auto;
+  width: 50%;
+
+}
+  </style>
+</head>
+<body>
+
+  <div class="button-container">
+      <img src="/static/logo1.png"  width="320" height="135">
+
+  </div>
+
+  
+
+
+  <div class="flex-container">
+
+    <div class="flex-child magenta">
+    
+      <img id="video_feed" class="shadowbox" src="{{ url_for('video_feed') }}" /> 
+      
+      <div class="button-container">
+        <button id="start_recording" class="button" onclick="startAnimation()">Start Recording</button>
+      </div>
+    
+    </div>
+    
+    <div class="flex-child2"  >
+      <h1 style="background-color:rgb(106, 0, 79);"> Transcription </h1>
+
+  
+      <div id="time" class="button-container"></div>
+
+      <script>
+          var eventSource = new EventSource("/time");
+          var timeElement = document.getElementById("time");
+  
+          eventSource.onmessage = function(event) {
+              timeElement.innerHTML = event.data;
+          };
+      </script>
+      
+    </div>
+    
+  </div>
+
+  <div class="button-container">
+
+    
+  </div>
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var recording = false;
+
+      $('#start_recording').click(function () {
+        recording = true;
+        $.get('/start_recording');
+      });
+
+      $('#stop_recording').click(function () {
+        recording = false;
+        $.get('/stop_recording');
+      });
+
+      // Continuously update the video feed
+      setInterval(function () {
+        if (!recording) {
+          $('#video_feed').attr('src', "{{ url_for('video_feed') }}?" + new Date().getTime());
+        }
+      }, 100);
+    });
+        function startAnimation() {
+            var button = document.querySelector('.button');
+            button.classList.add('animate');
+
+            setTimeout(function() {
+                var message = document.createElement('div');
+                message.className = 'message';
+                message.innerText = "Video Recorded!";
+                button.appendChild(message);
+            }, 4000);
+        }
+  </script>
+</body>
+</html>

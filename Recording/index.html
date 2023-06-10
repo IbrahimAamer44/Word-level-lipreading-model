@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Recording</title>
+</head>
+<body>
+    <h1>Video Recording</h1>
+    <video id="video" width="640" height="480" autoplay></video>
+    <br>
+    <button id="startButton" onclick="startCapture()">Start Recording</button>
+    <button id="stopButton" onclick="stopCapture()">Stop Recording</button>
+
+    <script>
+        var video = document.querySelector('#video');
+        var startButton = document.querySelector('#startButton');
+        var stopButton = document.querySelector('#stopButton');
+
+        // Get user permission to access the camera and microphone
+        navigator.mediaDevices.getUserMedia({video: true, audio: true})
+            .then(function(stream) {
+                video.srcObject = stream;
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+
+        function startCapture() {
+            fetch('/start_capture', {method: 'POST'})
+                .then(function(response)

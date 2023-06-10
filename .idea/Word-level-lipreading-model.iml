@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Dataset Generation" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Demonstration" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FlaskApp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Loss Plots" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Models" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Prediction" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Preprocessing" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Recording" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Timestamper" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Training" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/templates" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
