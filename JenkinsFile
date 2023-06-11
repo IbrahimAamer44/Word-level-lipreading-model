@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/IbrahimAamer44/Word-level-lipreading-model.git']])
+            }
+        }
+        stage('Build') {
+            steps {
+
+                dir('Models') {
+                    bat 'py -m TestModel'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+
+                dir('FlaskApp') {
+                    bat 'docker image build -t docker5-lipsol-flask .'
+                    bat 'docker run -p 5000:5000 -d docker5-lipsol-flask'
+                }
+            }
+        }
+    }
+}
