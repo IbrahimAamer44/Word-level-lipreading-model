@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Dataset Generation" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Demonstration" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/FlaskApp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FlaskApp/Prediction" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Loss Plots" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Models" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Prediction" isTestSource="false" />
