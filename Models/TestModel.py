@@ -6,4 +6,4 @@ model = create_LRCN_model()
 
 model.load_weights(weights_path)
 
-print("Model loaded Succesfully compiled !!!!")
+print("Model loaded Succesfully compiled !!!!!")
